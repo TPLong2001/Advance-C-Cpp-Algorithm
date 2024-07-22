@@ -134,7 +134,7 @@ int main (int argc, char const *argv[]){
 }
 ```
 
-
+# Lesson 4:
 
 ## 5.NULL Pointer 
 #### là con trỏ trỏ đến vùng nhớ bằng không hay nói cách khác nó không trỏ đến bất kì đối tượng hay vùng nhớ nào. nó được ứng dụng cho việc khai báo các con trỏ ban đầu khi chưa có đối tượng trỏ cụ thể để tránh trỏ vào các vùng nhớ rác không mong muốn gây lỗi hệ thống.

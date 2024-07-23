@@ -1,11 +1,15 @@
 # Lesson 3: Pointer
-## 1.Pointer
-### Kích thước pointer
-#### kích thước của pointer phụ thuộc vào kiến trúc máy tính thực thi
-#### Kiến trúc x86, con trỏ sẽ có kích thước 32-bit (4 bytes)
-#### Kiến trúc x64, con trỏ sẽ có kích thước 64-bit (8 bytes)
-### Định nghĩa
-#### Biến con trỏ là một biến có giá trị là địa chỉ của một biết khác ( chứa địa chỉ của một biến khác). Biến bình thường thì chỉ lưu giá trị
+
+<details>
+  <summary>chi tiết</summary
+
+## 1. Pointer
+ Kích thước pointer: kích thước của pointer phụ thuộc vào kiến trúc máy tính thực thi
++ Kiến trúc x86, con trỏ sẽ có kích thước 32-bit (4 bytes)
++ Kiến trúc x64, con trỏ sẽ có kích thước 64-bit (8 bytes)
+  
+Định nghĩa: Biến con trỏ là một biến có giá trị là địa chỉ của một biết khác ( chứa địa chỉ của một biến khác). Biến bình thường thì chỉ lưu giá trị
+    
 ```c
 int main{
     int var = 10;  //bien binh thuong
@@ -24,7 +28,7 @@ int main{
     printf("Dia chi array: %p\n",array);
 }
 ```
-## 2.function pointer
+## 2. function pointer
 #### Con trỏ hàm là 1 con trỏ lưu trữ địa chỉ của 1 hàm mà nó đang trỏ đến. Nó cũng có thể truyền một fumctiom như một đối số cho function khác.
 ```c
 #include<stdio.h>
@@ -140,6 +144,64 @@ int main (int argc, char const *argv[]){
 
 
 ## 6.Pointer to pointer
+</details>
 
+# Lesson 4: Goto_setjmp
+<details>
+  <summary>Chi tiết</summary>
 
-# Lesson 4: 
+  ### Tiêu đề phụ 1.1
+  Nội dung của tiêu đề phụ 1.1.
+
+  ### Tiêu đề phụ 1.2
+  Nội dung của tiêu đề phụ 1.2.
+
+  ### Tiêu đề phụ 1.3
+  Nội dung của tiêu đề phụ 1.3.
+
+</details>
+
+# Lesson 5: 
+<details>
+  <summary>Chi tiết</summary>
+
+  ### Tiêu đề phụ 1.1
+  Nội dung của tiêu đề phụ 1.1.
+
+  ### Tiêu đề phụ 1.2
+  Nội dung của tiêu đề phụ 1.2.
+
+  ### Tiêu đề phụ 1.3
+  Nội dung của tiêu đề phụ 1.3.
+
+</details>
+
+# Lesson 6: 
+<details>
+  <summary>Chi tiết</summary>
+
+  ### Tiêu đề phụ 1.1
+  Nội dung của tiêu đề phụ 1.1.
+
+  ### Tiêu đề phụ 1.2
+  Nội dung của tiêu đề phụ 1.2.
+
+  ### Tiêu đề phụ 1.3
+  Nội dung của tiêu đề phụ 1.3.
+
+</details>
+
+# Lesson 7: 
+<details>
+  <summary>Chi tiết</summary>
+
+  ### Tiêu đề phụ 1.1
+  Nội dung của tiêu đề phụ 1.1.
+
+  ### Tiêu đề phụ 1.2
+  Nội dung của tiêu đề phụ 1.2.
+
+  ### Tiêu đề phụ 1.3
+  Nội dung của tiêu đề phụ 1.3.
+
+</details>

@@ -150,15 +150,198 @@ int main (int argc, char const *argv[]){
 <details>
   <summary>Chi tiết</summary>
 
-  ### Tiêu đề phụ 1.1
-  Nội dung của tiêu đề phụ 1.1.
+  # 1. goto
+  ## Định nghĩa: 
+  "goto" là một từ khóa trong C, câu lệnh goto là một câu lệnh nhảy (jump) vô điều kiện. Khi sử dụng câu lệnh nó sẽ nhảy đến một nhãn đã đặt trước đó.
+việc nhảy vô điều kiện như vậy khiến ta rất dể dàng sử dụng để kiểm soát flow của chương trình, nhưng nếu lạm dụng nó có thể khiến cho chương trình trở lên khó đọc và bảo trì.
+  ### Ví Dụ
+ ```c
+#include<stdio.h>
 
-  ### Tiêu đề phụ 1.2
-  Nội dung của tiêu đề phụ 1.2.
+int main(int argc,char const *argv[]){
 
-  ### Tiêu đề phụ 1.3
-  Nội dung của tiêu đề phụ 1.3.
+    batdau:
+    for (int i = 0; i < 10; i++)
+    {
 
+        printf("i = %d\n",i);
+        if(i == 5){
+            goto batdau;
+        }
+    }
+    return 0;
+}
+```
+Trong ví dụ này sau khi i tiến tới 5 nó sẽ đọc đến câu lệnh goto để nhảy đến nhãn "batdau" và lại bắt đầu vòng lặp từ i = 0, vì vậy vòng lặp này sẽ chạy vô hạn từ 0 đến 5 và quay lại.
+
+  ## Ưu điểm của goto
+  ### Tự tạo 1 vòng lặp cơ bản
+  goto có thể được sử dụng để tạo một vòng lặp đơn giản bằng cách gắn nhãn nhảy và kiểm tra điều kiện thoát.
+  ### Ví Dụ
+```c
+#include <stdio.h>
+
+int main() {
+    int i = 0;
+
+    start:
+        if (i >= 5) {
+            goto end; 
+        }
+        printf("%d ", i);
+        i++;
+        goto start;
+    end:
+        printf("\n");
+    return 0;
+}
+```
+Khi i đạt đến giá trị 5, control sẽ chuyển đến nhãn "end" và kết thúc chương trình.
+
+  ### Thoát khỏi vòng lặp nhiều cấp độ
+Nhiều trường hợp có nhiều vòng lặp lồng nhau, khi đó để thoát khỏi toàn bộ hoặc 1 số vòng lặp sẽ rất khó khăn, ta sẽ phải kiểm tra điều kiện thoát vòng lặp liên tục ở các vòng lặp sau đó. Để giải quyết việc này ta có thể sử dụng goto để nhảy đến 1 nhãn đã đặt ở nơi cần thoát ra.
+  ### Ví Dụ
+```c
+for (int i = 0; i < 10; ++i) {
+    for (int j = 0; j < 10; ++j) {
+        if (some_condition(i, j)) {
+            goto exit_loops;
+        }
+    }
+}
+exit_loops:
+```
+
+  
+### Xử lý lỗi và giải phóng bộ nhớ
+Trong trường hợp xử lý lỗi, có thể sử dụng goto để dễ dàng giải phóng bộ nhớ đã được cấp phát trước khi thoát khỏi hàm.
+### Ví Dụ
+```c
+void process_data() {
+    int *data = malloc(sizeof(int) * 100);
+    if (data == NULL) {
+        goto cleanup;
+    }
+    cleanup:
+    free(data);
+}
+
+```
+  ### Implement Finite State Machines (FSM)
+Trong một số trường hợp, đặc biệt là khi triển khai Finite State Machines, goto có thể được sử dụng để chuyển đến các trạng thái khác nhau một cách dễ dàng khi thỏa mãn điều kiện đề ra trước đó, ta có thể cho nó nhảy sang xử lý các điều kiện khác.
+### Ví Dụ
+```c
+switch (current_state) {
+    case STATE_A:
+        // Xử lý State A
+        if (condition) {
+            goto STATE_B;
+        }
+        break;
+    case STATE_B:
+        break;
+}
+
+```
+   ## Nhược điểm của goto
+  + Việc sử dụng câu lệnh goto không được khuyến khích vì nó làm cho logic chương trình trở nên rất phức tạp.
+  + Việc sử dụng goto làm cho việc theo dõi dòng chảy của chương trình trở nên rất khó khăn.
+  + Việc sử dụng goto làm cho nhiệm vụ phân tích và xác minh tính đúng đắn của các chương trình (đặc biệt là các chương trình liên quan đến vòng lặp) trở nên rất khó khăn.
+  + Việc sử dụng goto có thể tránh được một cách đơn giản bằng cách sử dụng câu lệnh break và continue .
+
+# 2. setjmp.h
+  ## Định nghĩa: 
+  "setjmp.h" là một thư viện trong C cung cấp các hàm để xử lý các ngoại lệ theo mong muốn. có 2 hàm chính là setjmp và longjmp để thực hiện xử lý các ngoại lệ.
+```c
+setjmp(buf) == 0
+longjmp(buf,(x))
+```
+  ## Ví Dụ:
+```c
+#include<stdio.h>
+#include<setjmp.h>
+
+jmp_buf buf;
+int exception_code;
+
+int main(){
+
+    exception_code = setjmp(buf);
+
+    //ex1
+    if (exception_code == 2);
+    {
+        printf("Nhay den 2\n");
+        //exit();
+
+    }
+    printf("Test: %d\n",exception_code);
+
+    longjmp(buf,2);
+
+    printf("Thoat\n");
+    return 0;
+}
+```
+khi khời tạo setjmp(buf); giá trị exception_code sẽ bằng 0;
+sau khi hệ thống xử lý đến dòng longjmp(buf,2) lệnh này sẽ nhảy đến vị trí khởi tạo ban đầu và thay đổi giá trị exception_code thành 2 chính vì vậy nó sẽ nhảy vào if và in ra dòng nhảy đến 2.
+
+## Xử lý ngoại lệ:
+Từ các ứng dụng của 2 hàm trên ta define chúng thành 3 từ khóa chính với cấu trúc TRY CATCH (bắt lỗi và xử lý lỗi) giống với các ngôn ngứ bậc cao như sau.
+
+```c
+#define TRY         if((exception_code=setjmp(buf))==0)
+#define CATCH(x)    else if(exception_code == (x))
+#define THROW(x)    longjmp(buf,(x))
+```
+Sau đó khi cần xử lý lỗi ta dùng TRY và bắt lỗi ta dùng CATCH. Xác định lỗi, gán giá trị lỗi và nhảy đến xử lý lỗi ta dùng THROW.
+```c
+#include<stdio.h>
+#include<setjmp.h>
+
+jmp_buf buf;
+int exception_code;
+
+#define TRY         if((exception_code=setjmp(buf))==0)
+#define CATCH(x)    else if(exception_code == (x))
+#define THROW(x)    longjmp(buf,(x))
+
+double thuong(int a, int b){
+    if(b == 0){
+        // longjmp(buf,1);
+        THROW(1);   
+    }
+    return a/(double)b;
+}
+
+int checkArray(int array[], int size)
+{
+    if(size <= 0){
+        // longjmp(buf,2);//đặt mã lỗi là 2
+        THROW(2);
+    }
+    return 1;
+}
+
+
+int main(){
+    TRY
+    {
+        int array[0];
+        // ketqua = thuong(8,0);
+        // printf("Ket qua %f\n",ketqua);
+        checkArray(array, 0);
+    }
+    CATCH(1){
+        printf("ERROR! Mau bang 0\n");
+    }
+    CATCH(2)
+    {
+        printf("ERROR! Aray bang 0\n");
+    }
+    return 0;
+}
+```
 </details>
 
 # Lesson 5: 

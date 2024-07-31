@@ -344,18 +344,61 @@ int main(){
 ```
 </details>
 
-# Lesson 5: 
+# Lesson 5: Extern - Static - Register - Volatile
 <details>
   <summary>Chi tiết</summary>
 
-  ### Tiêu đề phụ 1.1
-  Nội dung của tiêu đề phụ 1.1.
+  ### 1. Extern
+  Trong một project thường được chia nhỏ các file để biên dịch riêng lẻ sau đó kết hợp với nhau, việc này nhằm tăng tốc độ biên dịch của các chương trình lớn.
+  Vì vậy để sử dụng được một Biến Toàn Cục hay một hàm từ một file khác ta có thể sử dụng "extern" để khai báo lại biến đó trong file cần sử dụng.
+  Tóm lại, Extern là: Tham chiếu của một biến toàn cục hoặc 1 hàm nào đó đã được định nghĩa ở phạm vi bên ngoài file đó. (chỉ khai báo chứ không định nghĩa giá trị).
+```c
+extern <kiểu dữ liệu>  <tên biến>;
+extern <kiểu dữ liệu>  <tên hàm>(các parameter truyền vào hàm đó);
+```
 
-  ### Tiêu đề phụ 1.2
-  Nội dung của tiêu đề phụ 1.2.
+  ### 2. Static
+  Biến static hay còn được gọi là biến tĩnh có 2 loại:
+  #### 2.1 Static local variable
+  Khi biến được khởi tạo với từ khóa "static" nó sẽ được lưu trữ trong vùng nhớ static,globle và sẽ tồn tại trong suốt vòng đời của chương trình ngay cả khi kết thúc hàm chứa nó. Chính vì vậy khi được khởi tạo lần đầu tiên nó sẽ khởi tạo duy nhất 1 lần, với các lần khởi tạo tiếp theo sẽ bị bỏ qua.
+  ```c
+//exemple
+void count(){
+    static int a = 0;
+    printf("a = %d\n",a);
+    a++;
+}
+int main(int argv, char const *argc[])
+{
+    count();
+    count();
+    count();
+    return 0;
+}
+```
+OUTPUT:
+```
+a = 0
+a = 1
+a = 2
+```
+  #### 2.1 Static globle variable and function
+  Các biến toàn cục hay hàm sử dụng từ khóa "static" thì khi đó phạm vi sử dụng giới hạn trong File khởi tạo đó, phạm vị bên ngoài file sẽ không thể sử dụng kể cả sử dụng "extern" để truy xuất. Chính bởi vậy nó có tác dụng không cho người dùng khác truy cập từ bên ngoài file vào các hàm phụ hỗ trợ các hàm chính. Đó là ứng dụng để tạo ra các thư viện.
+  ```c
+static int num;
+static void count(){
+    int a = 0;
+    printf("a = %d\n",a);
+    a++;
+}
+```
 
-  ### Tiêu đề phụ 1.3
-  Nội dung của tiêu đề phụ 1.3.
+  ### 3. Register
+  Các biến được khai báo với tử khóa này sẽ được lưu trong thanh ghi register thay vì lưu trong ram, nó sẽ giúp tốc độ tính toán nhanh hơn bình thường
+
+  ### 4. Volatile
+  Các biến được khai báo với tử khóa này sẽ thông báo cho chương trình không được phép tối ưu hóa biến đó trong quá trình biên dịch tránh gây lỗi không mong muốn và rất khó phát hiện.
+  Một ưu điểm quan trong ứng dụng trong RTOS đó là khi có nhiều luồng chương trình chạy đồng thời, nếu cùng một mảng chạy 2 tác vụ khác nhau khi đang ghi dở vào hàm ở tác vụ 1 mà nhảy sang tác vụ 2 ghi vẫn vào hàm đó thì giá trị ban đầu ghi sẽ bị ghi đè mất và khi quay lại sẽ gây sai dữ liệu. Vì vây ta bắt buộc sử dụng "volatile" để bắt tác vụ đó thực hiện lại từ đầu nếu đang làm dở mà nhảy đi và quay lại.
 
 </details>
 

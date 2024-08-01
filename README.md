@@ -402,18 +402,104 @@ static void count(){
 
 </details>
 
-# Lesson 6: 
+# Lesson 6: Bitmask
 <details>
   <summary>Chi tiết</summary>
+  
+  #### Bitmask "mặt nạ bit" là một kỹ thuật sử dụng thao tác với các bit để set, clear, get 1 bit bất kỳ trong 1 thanh ghi bằng cách sử dụng các phép toán logic.
+  ### 1. AND bitwise
+  - ký hiệu là "&".
+  - Được sử dụng để như một phép nhân, với đầu ra là 1 nếu cả 2 bit đầu vào là 1
+  
+```c
+int result = num1 & num2;
+```
+Example:
+```
+0 & 0 = 0
+0 & 1 = 0
+1 & 0 = 0
+1 & 1 = 1
 
-  ### Tiêu đề phụ 1.1
-  Nội dung của tiêu đề phụ 1.1.
+  0b11110011
+~ 0b11001011
+= 0b11000011
+```
+  ### 2. OR bitwise
+  - ký hiệu là "|".
+  - Được sử dụng để như một phép cộng, với đầu ra là 0 nếu cả 2 bit đầu vào là 0
+  
+```c
+int result = num1 | num2;
+```
+Example:
+```
+0 | 0 = 0
+0 | 1 = 1
+1 | 0 = 1
+1 | 1 = 1
 
-  ### Tiêu đề phụ 1.2
-  Nội dung của tiêu đề phụ 1.2.
+  0b11110011
+| 0b11001011
+= 0b11111011
+```
+  ### 3. XOR bitwise
+  - ký hiệu là "^".
+  - Với đầu ra là 1 nếu 2 bit đầu vào là khác nhau ( 0 với 1)
+  
+```c
+int result = num1 ^ num2;
+```
+Example:
+```
+0 ^ 0 = 0
+0 ^ 1 = 1
+1 ^ 0 = 1
+1 ^ 1 = 0
 
-  ### Tiêu đề phụ 1.3
-  Nội dung của tiêu đề phụ 1.3.
+  0b11110011
+^ 0b11001011
+= 0b00111000
+```
+
+  ### 4. NOT bitwise
+  - ký hiệu là "~".
+  - Được sử dụng để đào toàn bộ các bit của biến đó.
+  
+```c
+int result = ~num;
+```
+Example:
+```
+~ 0 = 1
+~ 1 = 0
+~ 0b11110011 = 0b00001100
+```
+
+### 5. Shift left bitwise
+  - ký hiệu là "<<".
+  - Được sử dụng để dịch chuyển bit sang trái n bit tương đương với x (2^n).
+  
+```c
+int result = num << n;
+```
+Example:
+```
+1 << 3 = 0b00000001 << 3 = 0b00001000 = 1 x 2^3
+5 << 2 = 0b00000101 << 2 = 0b00010100 = 1 x 2^2 + 1 x 2^4 = 5 x 2^2
+```
+### 6. Shift right bitwise
+  - ký hiệu là ">>".
+  - Được sử dụng để dịch chuyển bit sang phải n bit tương đương với / (2^n).
+  
+```c
+int result = num >> n;
+```
+Example:
+```
+11 >> 3 = 0b00001011 >> 3 = 0b00000001 = 11 / 2^3 = 1
+15 >> 2 = 0b00001111 >> 2 = 0b00000011 = 15 / 2^2 = 3
+```
 
 </details>
 

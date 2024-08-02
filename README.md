@@ -524,18 +524,96 @@ Example:
 <details>
   <summary>Chi tiết</summary>
 
-  ### Tiêu đề phụ 1.1
-  Nội dung của tiêu đề phụ 1.1.
+  ### Struct
+  Struct là 1 kiểu dữ liệu tự định nghĩa và được sử dụng để lưu trữ các biến có kiểu dữ liệu khác nhau ở một đối tượng duy nhất.
+  - Các biến sẽ được lưu trữ liên tục trên bộ nhớ và tên của Struct chính là con trỏ trỏ và địa chỉ của phần tử đầu tiên.
+  - Kích thước của struct sẽ phụ thuộc và kích thước của các dữ liệu bên trong nó và phần PADDING.
+  - PADDING: khi lưu trữ các dữ liệu sẽ được lưu lần lượt vào block ( kích thước của block phụ thuộc vào kích thước của kiểu dữ liệu lớn nhất trong struct). Nếu dữ liệu tiếp theo nào đó cần được lưu trữ có kích thước lớn hơn phần dư còn lại của block ( ví dụ block có kích thước 4 byte sau khi lưu 2 biến 1 byte còn thừa 2 byte nhưng biến tiếp theo càn lưu trữ lại có kích thước 4 byte > 2 byte còn lại), khi đó padding sẽ được thêm vào phần dư của block đó (2 byte padding) và dữ liệu sẽ được đẩy sang  block mới.
 
-  ### Tiêu đề phụ 1.2
-  Nội dung của tiêu đề phụ 1.2.
+Example:
+```c
+typedef struct 
+{                       // 1 block = 4 byte                                                  1 byte  1 byte  1 byte 1 byte
+    uint16_t var1;      // 2 byte  2 < 4 byte dư                                 block 1:   //-var1-//-var1-//--dư--//--dư--//      => còn 2 byte dư
+    uint8_t var2;       // 1 byte  1 < 2 byte dư                                 block 1:   //-var1-//-var1-//-var2-//-padding-//   => còn 1 byte dư
+    uint32_t var3;      // 4 byte  4 > 1 byte dư => 1 byte padding =>     chuyển block 2:   //-var3-//-var3-//-var3-//-var3-//
+}frame;                 // => size = số block cần dùng * kích thước của block = 2 * 4 = 8 byte
 
-  ### Tiêu đề phụ 1.3
-  Nội dung của tiêu đề phụ 1.3.
+int main()
+{
+    printf("Kich thuoc: %d byte\n",sizeof(frame);
+    return 0;
+}
+```
+OUTPUT:
+```
+Kich thuoc: 8 byte
+```
+
+  ### Bit Field
+  Bit fields trong C là các thành viên của một struct có kích thước được chỉ định dưới dạng số bit thay vì số byte. Chúng cho phép bạn lưu trữ nhiều giá trị nhỏ trong một không gian bộ nhớ nhỏ gọn hơn so với việc sử dụng các kiểu dữ liệu thông thường. Và địa chỉ của chúng vẫn được lưu trữ lần lượt liên tục trên bộ nhớ.
+  ```c
+struct MyStruct {
+    unsigned int field1 : 1;  // 1 bit
+    unsigned int field2 : 4;  // 4 bits
+    unsigned int field3 : 3;  // 3 bits
+};
+Các biến được định nghĩa với độ rộng xác định trước được gọi là trường bit (bit field). Một trường bit có thể chứa nhiều hơn một bit nhưng độ rộng này phải nhỏ hơn hoặc bằng độ rộng bit của kiểu.
+
+```
+
+  ### Union
+  Tương tự như Struct, Union là một kiểu dữ liệu trong C cho phép bạn lưu trữ các biến khác nhau, nhưng chỉ tại một vị trí bộ nhớ. 
+  - Union chỉ có thể lưu trữ một trong các biến thành viên của nó tại một thời điểm.
+  - Điều này giúp tiết kiệm bộ nhớ khi bạn cần lưu trữ các loại dữ liệu khác nhau nhưng không cần lưu trữ tất cả cùng một lúc.
+  - Kích thước của Union là kích thước của biến có kích thước lớn nhất và toàn bộ các biến trong đó sẽ sử dụng cùng một vùng địa chỉ đó.
+
+```c
+typedef union 
+{
+    uint16_t var1;      // 2 byte
+    uint8_t var2;       // 1 byte
+    uint32_t var3;      // 4 byte
+}frame;
+int main()
+{
+    printf("Kich thuoc: %d byte\n",sizeof(frame);
+    return 0;
+}
+```
+OUTPUT:
+```
+Kich thuoc: 4 byte
+```
+
+Example:
+```c
+typedef union 
+{
+    uint16_t var1;      // 2 byte
+    uint8_t var2;       // 1 byte
+    uint32_t var3;      // 4 byte
+}frame;
+int main()
+{                                           //                                        LSB                          MSB
+    frame test;                             //        data in 4 byte address:   //--------//--------//--------//--------//
+
+    test.var3 = 243534;                     // 0x03B74E      =>         Data:   //---4E---//---B7---//---03---//---00---//  
 
 
-
-
+    printf("test.var1: %p\n",test.var1);    // 2 byte data LSB                 //---4E--//---B7---//                             => 0xB74E
+    printf("test.var2: %p\n",test.var2);    // 1 byte data LSB                 //---4E---//                                      => 0x4E
+    printf("test.var3: %p\n",test.var3);    // 4 byte data LSB                 //---4E---//---B7---//---03---//---00---//        => 0x3B74E
+    return 0;
+}
+```
+OUTPUT:
+```
+test.var1: 0000B74E
+test.var2: 0000004E
+test.var3: 0003B74E
+```
+vì các thành viên chia sẻ cùng 1 vị trí bộ nhó lên khi khai báo cho biến có kích thước lớn nhất, sau đó ta lấy giá trị của các biến thành viên khác thì khi đó nó sẽ đọc các byte giá trị của kích thước lớn nhất theo kích thước của biến thành viên đó. 
 
 
 

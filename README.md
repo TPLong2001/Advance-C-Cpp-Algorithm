@@ -1,4 +1,4 @@
-# Lesson 3: Pointer
+# Lesson 3: POINTER
 
 <details>
   <summary>chi tiết</summary
@@ -67,7 +67,6 @@ int main (int argc, char const *argv[]){
 }
 ```
 
-
 ## 3.Type pointer
 #### Các kiểu dữ liệu của con trỏ cho thấy con trỏ đang lưu trữ dữ giá trị kiểu giữ liệu nào tại địa chỉ đó.
 #### VD: char *ptr; đây là con trỏ kiểu char nó sẽ sử dụng 1 byte địa chỉ tương úng để chứa giá trị. Nếu có các giá trị xếp liên tiếp (như kiểu mảng, kiểu chuỗi) thì xác định theo độ lệch địa chỉ cũng dựa vào kiểu dữ liệu của con trỏ đó, từ đó việc dịch địa chỉ để lấy giá trị trong 1 chuỗi các giá trị liên tiếp mới chính xác.
@@ -99,7 +98,6 @@ int main (int argc, char const *argv[]){
     return 0;
 }
 ```
-
 
 ## 4.Pass by value và Pass by reference
 #### Khi truyền các đối số vào 1 hàm thì:
@@ -138,15 +136,20 @@ int main (int argc, char const *argv[]){
 }
 ```
 
-
 ## 5.NULL Pointer 
 #### là con trỏ trỏ đến vùng nhớ bằng không hay nói cách khác nó không trỏ đến bất kì đối tượng hay vùng nhớ nào. nó được ứng dụng cho việc khai báo các con trỏ ban đầu khi chưa có đối tượng trỏ cụ thể để tránh trỏ vào các vùng nhớ rác không mong muốn gây lỗi hệ thống.
-
 
 ## 6.Pointer to pointer
 </details>
 
-# Lesson 4: Goto_setjmp
+
+
+
+
+
+
+
+# Lesson 4: GOTO_SETJMP
 <details>
   <summary>Chi tiết</summary>
 
@@ -180,7 +183,6 @@ Trong ví dụ này sau khi i tiến tới 5 nó sẽ đọc đến câu lệnh 
   ### Ví Dụ
 ```c
 #include <stdio.h>
-
 int main() {
     int i = 0;
 
@@ -211,7 +213,6 @@ for (int i = 0; i < 10; ++i) {
 }
 exit_loops:
 ```
-
   
 ### Xử lý lỗi và giải phóng bộ nhớ
 Trong trường hợp xử lý lỗi, có thể sử dụng goto để dễ dàng giải phóng bộ nhớ đã được cấp phát trước khi thoát khỏi hàm.
@@ -323,7 +324,6 @@ int checkArray(int array[], int size)
     return 1;
 }
 
-
 int main(){
     TRY
     {
@@ -344,7 +344,16 @@ int main(){
 ```
 </details>
 
-# Lesson 5: Extern - Static - Register - Volatile
+
+
+
+
+
+
+
+
+
+# Lesson 5: EXTERN - STATIC - REGISTER - VOLATILE
 <details>
   <summary>Chi tiết</summary>
 
@@ -402,7 +411,7 @@ static void count(){
 
 </details>
 
-# Lesson 6: Bitmask
+# Lesson 6: BITMASK
 <details>
   <summary>Chi tiết</summary>
   
@@ -410,7 +419,6 @@ static void count(){
   ### 1. AND bitwise
   - ký hiệu là "&".
   - Được sử dụng để như một phép nhân, với đầu ra là 1 nếu cả 2 bit đầu vào là 1
-  
 ```c
 int result = num1 & num2;
 ```
@@ -465,7 +473,6 @@ Example:
   ### 4. NOT bitwise
   - ký hiệu là "~".
   - Được sử dụng để đào toàn bộ các bit của biến đó.
-  
 ```c
 int result = ~num;
 ```
@@ -479,7 +486,6 @@ Example:
 ### 5. Shift left bitwise
   - ký hiệu là "<<".
   - Được sử dụng để dịch chuyển bit sang trái n bit tương đương với x (2^n).
-  
 ```c
 int result = num << n;
 ```
@@ -491,7 +497,6 @@ Example:
 ### 6. Shift right bitwise
   - ký hiệu là ">>".
   - Được sử dụng để dịch chuyển bit sang phải n bit tương đương với / (2^n).
-  
 ```c
 int result = num >> n;
 ```
@@ -503,7 +508,232 @@ Example:
 
 </details>
 
-# Lesson 7: 
+
+
+
+
+
+
+
+
+
+
+
+
+# Lesson 7: STRUCT - UNION 
+<details>
+  <summary>Chi tiết</summary>
+
+  ### Tiêu đề phụ 1.1
+  Nội dung của tiêu đề phụ 1.1.
+
+  ### Tiêu đề phụ 1.2
+  Nội dung của tiêu đề phụ 1.2.
+
+  ### Tiêu đề phụ 1.3
+  Nội dung của tiêu đề phụ 1.3.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Lesson 8: MEMORY LAYOUT
+<details>
+  <summary>Chi tiết</summary>
+
+Khi viết một chương trình C/C++ thì source code (file.h, file.c, file.exe, .....) sẽ được lưu trữ trong bộ nhớ FLASH hoặc SSD, còn khi chương trình được thực thi các mã nguồn code sẽ được biên dịch vào mã mãy và được đưa vào bộ nhớ RAM để thực thi. Bộ nhớ của chương trình có thể chia thành các phần như sau:
+  ### 1. Text Segment
+  Đây là vùng địa chỉ thấp nhất lưu trữ mã lệnh của chương trình.
+  - lưu trữ các biến const và dữ liệu trong con trỏ chuỗi khai báo như sau: char *ptr = "abc";
+  - Vùng này chỉ có thể đọc và thực thi chứ không thể sửa được dữ liệu.
+
+  ### 2. Data Segment
+  Đây là vùng nhớ nằm phía trên của Text Segment:
+  - Chứa các biến global và biến static
+  - Có quyền truy cập cả đọc và ghi.
+  - Các biến này sẽ được thu hồi sau khi kết thúc toàn bộ chương trình.
+
+  Phân vùng này còn phân ra 2 làm phân vùng nhỏ là BSS và DS:
+  - BSS: chứa các biến global và biến static không khai báo giá trị khởi tạo hoặc khai báo giá trị khởi tạo bằng 0.
+  - DS: chứa các biến global và biến static khai báo giá trị khởi tạo khác 0.
+
+  ### 3. Heap Segment
+  Đây là vùng nhớ nằm trên Data Segment, kích thước của vùng nhớ có thể thay đổi được tùy thuộc vào từng chương trình.
+  - Dùng cho cấp phát bộ nhớ động.
+  - Được cấp phát và giải phóng bằng các hàm như: malloc(), calloc(), realloc(), và free().
+  - Bộ nhớ do người dùng tự quản lý. Vì vậy cần tự thu hồi vùng bộ nhớ Heap đã cấp phát khi không còn sử dụng để tránh hiện tượng MEMORY LEAK.\
+ 
+  ### 4. Stack Segment
+  Đây là vùng nhớ nằm trên cùng có cấu trúc LIFO (last in first out) và được cấp phát bởi hệ thống
+  - Dùng quản lý các biến cục bộ và các lời gọi hàm.
+  - Có quyền đọc và ghi dữ liệu.
+  - Mỗi khi hàm được gọi, Stack sẽ cấp phát một khối bộ nhớ (stack frame) cho hàm đó để thực hiện quá trình Stacking và Unstacking.
+  - Sau khi thoát khỏi hàm frame stack sẽ được tự động giải phóng bởi hệ thống.
+  - Nếu ta sử dụng quá nhiều biến cục bộ hoặc hàm lồng nhau thì có thể sẽ hết bộ nhớ Stack và xảy ra lỗi Stack Over Flow. ví dụ như hàm đệ quy vô hạn.
+  
+```c
+void deQuy() {
+    deQuy();
+}
+
+int main() {
+    deQuy();
+    return 0;
+}
+```
+  ### 5. Cấp phát động và giải phóng bộ nhớ
+  #### 5.1 Hàm malloc()
+  - Hàm malloc() là hàm sử dụng để cấp phát 1 mảng liên tục trong bộ nhớ theo kích thước byte mong muốn.
+  - Giá trị trả về của hàm là một con trỏ kiểu void vì vậy ta sẽ phải ép kiểu sang kiểu dữ liệu cần dùng. Trả về NULL nếu không thành công.
+  - Vì hàm này không xóa (clear) hoặc sửa đổi (modify) bộ nhớ, do đó nội dung của bộ nhớ được cấp phát sẽ được xem như là chứa rác.
+  ```c
+    uint8_t *ptr = NULL;
+    ptr = (uint8_t*)malloc(4 * sizeof(uint8_t));
+    for (int i = 0; i < 4; i++)
+    {
+        printf("Gia tri: %d\n",ptr + i);
+    }
+```
+
+  #### 5.2 Hàm calloc()
+  - Hàm calloc cũng tương tự như malloc nhưng calloc cấp phát (allocate) và xóa (clear) bộ nhớ cùng lúc.
+  - Cấp phát 1 bộ nhớ bằng với số phần tử cấp phát * kích thước kiểu dữ liệu.
+    ```c
+    int *ptr = calloc(5,sizeof(int));
+    ```
+  Ta cũng có thể sử dụng hàm malloc() và memset() để thay thế cho calloc(). Hàm memset sẽ thay đổi giá trị trong một buffer. 
+  - Đối số đầu tiên là con trỏ tới buffer cần điều chỉnh nội dung. Đối số thứ hai là giá trị để thay đổi nội dung của buffer, và đối số cuối cùng là số byte bị thay đổi.
+  ```c
+  int *ptr = malloc(5 * sizeof(int));
+  memset(ptr, 0, 5* sizeof(int));
+```
+
+  #### 5.3 Hàm realloc()
+  - Hàm cấp phát lại kích thước của 1 mảng động trước đó khi ta muốn thay đổi kích thước ban đầu của mảng cấp phát. Kích thước được yêu cầu có thể nhỏ hơn hoặc lớn hơn lượng cấp phát đang có.
+  - Nếu bộ nhớ mới được yêu cầu cấp phát nhỏ hơn bộ nhớ hiện tại, thì phần bộ nhớ dư bị trả lại heap.
+  - Nếu kích thước lớn hơn hiện tại, nếu được thì, bộ nhớ sẽ được cấp phát thêm ngay sau vị trí cấp phát hiện tại.
+  - Nhưng nếu vị trí hiện tại không đủ bộ nhớ thì, bộ nhớ được sẽ được cấp phát ở vị trí mới trong heap và dữ liệu cũ được copy sang vùng mới.
+
+Cú pháp khai báo:
+```c
+uint16_t ptr = realloc(ptr, 6 * sizeof(uint16_t));
+```
+Example:
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdint.h>
+void test2()
+{
+    int *array = (int*)malloc(sizeof(int) * 2);
+    printf("dia chi array[0]: %p\n", array);
+    printf("dia chi array[1]: %p\n", array + 1);
+
+    int *array1 = (int*)malloc(sizeof(int) * 2);
+    printf("dia chi array1[0]: %p\n", array1);
+    printf("dia chi array1[1]: %p\n", array1 + 1);
+
+    array = (int*)realloc(array,sizeof(int) * 4);
+    printf("dia chi array[0]: %p\n", array);
+    printf("dia chi array[1]: %p\n", array + 1);
+
+    free(array);
+    free(array1);
+}
+
+int main()
+{
+  test2();
+  return 0;
+}
+```
+Ouput:
+```
+dia chi array[0]: 00A71B00
+dia chi array[1]: 00A71B04
+dia chi array1[0]: 00A71B10
+dia chi array1[1]: 00A71B14
+dia chi array[0]: 00A71B20
+dia chi array[1]: 00A71B24
+```
+
+  ### 6. Memori leaks
+  Lỗi rò rỉ bộ nh xảy ra khi bộ nhớ được cấp phát không bao giờ được sử dụng lại nhưng lại không được giải phóng. Vì vậy các vùng bộ nhớ đó không thể đòi lại và sử dụng được nữa. Nếu bộ nhớ cứ liên tục được cấp phát     rồi mất, thì chương trình sẽ đến lúc ngưng hoạt động. Điều này xảy ra khi:
+  - Bị mất địa chỉ bộ nhớ (losing the address).
+  - Hàm free() không bao giờ được sử dụng hoặc rò rỉ ẩn (hidden leak).
+
+Example:
+```c
+char *ptr;
+while (1) {
+    ptr = (char*) malloc(1000000);
+    printf("Allocating\n");
+}
+```
+
+#### 6.1 Bị mất địa chỉ bộ nhớ (losing the address)
+```c
+void test2()
+{
+    int *array = (int*)malloc(sizeof(int) * 2);
+    printf("dia chi array[0]: %p\n", array);
+    printf("dia chi array[1]: %p\n", array + 1);
+
+    array = (int*)malloc(sizeof(int) * 2);
+    printf("dia chi array[0]: %p\n", array);
+    printf("dia chi array[1]: %p\n", array + 1);
+
+    free(array);
+}
+int main()
+{
+    test2();
+    printf("------------------------\n");
+    test2();
+    return 0;
+}
+```
+OUTPUT:
+```
+dia chi array[0]: 009E1B00
+dia chi array[1]: 009E1B04
+dia chi array[0]: 009E1B10
+dia chi array[1]: 009E1B14
+------------------------
+dia chi array[0]: 009E1B10
+dia chi array[1]: 009E1B14
+dia chi array[0]: 009E1B20
+dia chi array[1]: 009E1B24
+```
+Như ta đã thấy, Khi array được gán tiếp một địa chỉ mới. Địa chỉ của lần cấp phát bộ nhớ đầu tiên bị mất khi array được cấp phát bộ nhớ lần thứ hai. Chính vì vậy không có con trỏ nào trỏ vào phân vùng địa chỉ cũ của array vì vậy không thể giải phóng nó và nó sẽ bị mất đi truy cập trong khi vẫn bị đánh dấu là đang sử dụng và ta không thể sử dụng lại nó nữa.
+
+#### 6.2 Rò rỉ ẩn (hidden leak)
+Nó thể xảy ra khi giải phóng những cấu trúc (structure) được tạo bằng cách sử dụng từ khóa struct. Nếu trong structure chứa con trỏ tới bộ nhớ cấp phát động, thì những con trỏ này phải được giải phóng trước khi structure được giải phóng. nếu không ta sẽ mất con trỏ trò vào vùng đó khi giải phóng truct trước.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Lesson 9: 
 <details>
   <summary>Chi tiết</summary>
 

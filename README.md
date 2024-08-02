@@ -353,6 +353,7 @@ int main(){
 
 
 
+
 # Lesson 5: EXTERN - STATIC - REGISTER - VOLATILE
 <details>
   <summary>Chi tiết</summary>
@@ -410,6 +411,18 @@ static void count(){
   Một ưu điểm quan trong ứng dụng trong RTOS đó là khi có nhiều luồng chương trình chạy đồng thời, nếu cùng một mảng chạy 2 tác vụ khác nhau khi đang ghi dở vào hàm ở tác vụ 1 mà nhảy sang tác vụ 2 ghi vẫn vào hàm đó thì giá trị ban đầu ghi sẽ bị ghi đè mất và khi quay lại sẽ gây sai dữ liệu. Vì vây ta bắt buộc sử dụng "volatile" để bắt tác vụ đó thực hiện lại từ đầu nếu đang làm dở mà nhảy đi và quay lại.
 
 </details>
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Lesson 6: BITMASK
 <details>
@@ -558,9 +571,8 @@ struct MyStruct {
     unsigned int field2 : 4;  // 4 bits
     unsigned int field3 : 3;  // 3 bits
 };
-Các biến được định nghĩa với độ rộng xác định trước được gọi là trường bit (bit field). Một trường bit có thể chứa nhiều hơn một bit nhưng độ rộng này phải nhỏ hơn hoặc bằng độ rộng bit của kiểu.
-
 ```
+Các biến được định nghĩa với độ rộng xác định trước được gọi là trường bit (bit field). Một trường bit có thể chứa nhiều hơn một bit nhưng độ rộng này phải nhỏ hơn hoặc bằng độ rộng bit của kiểu.
 
   ### Union
   Tương tự như Struct, Union là một kiểu dữ liệu trong C cho phép bạn lưu trữ các biến khác nhau, nhưng chỉ tại một vị trí bộ nhớ. 

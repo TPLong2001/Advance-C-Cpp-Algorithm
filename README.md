@@ -823,15 +823,65 @@ Nó thể xảy ra khi giải phóng những cấu trúc (structure) được t�
 
 
 
-# Lesson 9: 
+# Lesson 9: JSON
 <details>
   <summary>Chi tiết</summary>
 
-  ### Tiêu đề phụ 1.1
-  Nội dung của tiêu đề phụ 1.1.
+  ### Định nghĩa
+  - JSON là viết tắt của "JavaScript Object Notation" (Ghi chú về Đối tượng JavaScript).
+  - Đây là một định dạng truyền tải dữ liệu phổ biến trong lập trình và giao tiếp giữa các máy chủ và trình duyệt web, cũng như giữa các hệ thống khác nhau.
+  - JSON được thiết kế để dễ đọc và dễ viết cho con người, cũng như dễ dàng để phân tích và tạo ra cho máy tính.
 
-  ### Tiêu đề phụ 1.2
-  Nội dung của tiêu đề phụ 1.2.
+```json
+{
+  "name": "John Doe",
+  "age": 30.1234,
+  "city": "New York",
+  "isStudent": true,
+  "grades": [85, 90, 78]
+}
+
+```
+
+  ### Cấu trúc
+  - Định dạng JSON sử dụng các cặp key – value để dữ liệu sử dụng.
+  - Nó hỗ trợ các cấu trúc dữ liệu như đối tượng và mảng.
+  - Chuỗi JSON được bao lại bởi dấu ngoặc nhọn {}.
+  - Các key, valuecủa JSON bắt buộc phải đặt trong dấu nháy kép “.
+  - Nếu có nhiều dữ liệu thì dùng dấu phẩy , để ngăn cách.
+  - Value cho phép các kiểu dữ liệu cơ bản: numbers, String, Booleans, arrays, objects, null.
+```c
+typedef enum {
+    JSON_NULL,
+    JSON_BOOLEAN,
+    JSON_NUMBER,
+    JSON_STRING,
+    JSON_ARRAY,
+    JSON_OBJECT
+} JsonType;
+
+typedef struct JsonValue {
+    JsonType type;
+    union 
+    {
+        int boolean;
+        double number;
+        char *string;
+        struct 
+        {
+            struct JsonValue *values;
+            size_t count;
+        } array;
+        struct 
+        {
+            char **keys;
+            struct JsonValue *values;
+            size_t count;
+        } object;
+    } value;
+} JsonValue;
+```
+  
 
   ### Tiêu đề phụ 1.3
   Nội dung của tiêu đề phụ 1.3.

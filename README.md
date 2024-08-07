@@ -627,7 +627,7 @@ test.var3: 0003B74E
 ```
 vì các thành viên chia sẻ cùng 1 vị trí bộ nhó lên khi khai báo cho biến có kích thước lớn nhất, sau đó ta lấy giá trị của các biến thành viên khác thì khi đó nó sẽ đọc các byte giá trị của kích thước lớn nhất theo kích thước của biến thành viên đó. 
 
-
+</details>
 
 
 
@@ -810,6 +810,7 @@ Như ta đã thấy, Khi array được gán tiếp một địa chỉ mới. Đ
 #### 6.2 Rò rỉ ẩn (hidden leak)
 Nó thể xảy ra khi giải phóng những cấu trúc (structure) được tạo bằng cách sử dụng từ khóa struct. Nếu trong structure chứa con trỏ tới bộ nhớ cấp phát động, thì những con trỏ này phải được giải phóng trước khi structure được giải phóng. nếu không ta sẽ mất con trỏ trò vào vùng đó khi giải phóng truct trước.
 
+</details>
 
 
 
@@ -882,10 +883,73 @@ typedef struct JsonValue {
 } JsonValue;
 ```
 
-
 </details>
 
-# Lesson 10:
+
+
+
+
+
+
+
+
+
+
+# Lesson 10: Liked List
+<details>
+  <summary>Chi tiết</summary>
+
+
+  ### 1. Định Nghĩa
+  - Linked list là một cấu trúc dữ liệu trong lập trình máy tính, được sử dụng để tổ chức và lưu trữ dữ liệu. 
+  - Một linked list bao gồm một chuỗi các "nút" (nodes), mỗi nút là một cấu trúc có hai thành phần:
+    + Thành phần dữ liệu: lưu thông tin về bản thân phần tử đó.
+    + Thành phần liên kết: lưu địa chỉ phần tử liên kết với nó trong danh sách, nếu phần tử đó là phần tử cuối cùng thì thành phần này bằng NULL.
+  Cấu trúc của 1 node trong Singly Linked List.
+```c
+typedef struct node
+{
+    int value;
+    struct node* next;
+}node;
+```
+  
+  ### 2. Đặc điểm
+  - Được cấp phát bộ nhớ khi chạy chương trình.
+  - Có thể thay đổi kích thước qua việc thêm, xóa phần tử.
+  - Kích thước tối đa phụ thuộc vào bộ nhớ khả dụng của RAM.
+  - Các phần tử được lưu trữ ngẫu nhiên (không liên tiếp) trong RAM.
+  - Có hai loại linked list chính:
+    + Singly Linked List (Danh sách liên kết đơn): Mỗi nút chỉ chứa một con trỏ đến nút tiếp theo trong chuỗi.
+    + Doubly Linked List (Danh sách liên kết đôi): Mỗi nút chứa hai con trỏ, một trỏ đến nút tiếp theo và một trỏ đến nút trước đó.
+
+  
+  ### 3. So sánh với array
+
+  |Array (mảng)|Linked List (danh sách liên kết)|
+  |:----------|:-----------|
+  |- Bộ nhớ được cấp phát liên tiếp nhau|- Bộ nhớ lưu trữ các node không cần liên tiếp nhau, các node chứa con trỏ liên kết đến các node cạnh nó|
+  |- Kích thước cố định sau khi cấp phát|- Kích thước linh hoạt, có thể thay đổi bằng cách thêm, xóa node|
+  |- Có thể truy cập bất cứ phần tử nào ngay lập tức với số chỉ của nó trong mảng|- Muốn truy cập tới phần tử thứ i phải duyệt danh sách từ vị trí đầu tới i|
+  |- Thêm hoặc xóa phần tử rất khó khăn, phải dịch chuyển các phần tử khác để giữ tính liên tiếp trong bộ nhớ|- Thêm xóa rất dễ dàng bằng việc sửa con trỏ liên kết node|
+  |- Bố nhớ chỉ cần lưu trữ các phần tử|- Bộ nhớ cần lưu trữ phần tử và con trỏ liên kết => tốn bộ nhớ hơn|
+  |- Array được sử dụng khi ta cần sử dụng để lưu trữ mảng với số lượng phần tử đã biết trước và phục vụ truy xuất các phẩn tử ngẫy nhiên nhanh|- Linked list được sử dụng khi ta càn sử dụng để lưu trữ mảng linh hoạt về số lượng và có thể thêm xóa các phần tử vào vị trí bất kì dễ dàng|
+  
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Lesson 11:
 <details>
   <summary>Chi tiết</summary>
 

@@ -607,15 +607,15 @@ typedef union
     uint32_t var3;      // 4 byte
 }frame;
 int main()
-{                                           //                                        LSB                          MSB
-    frame test;                             //        data in 4 byte address:   //--------//--------//--------//--------//
+{                                           //                                 LSB                          MSB
+    frame test;                             //  data in 4 byte address:   //--------//--------//--------//--------//
 
-    test.var3 = 243534;                     // 0x03B74E      =>         Data:   //---4E---//---B7---//---03---//---00---//  
+    test.var3 = 243534;                     // 0x03B74E    =>     Data:   //---4E---//---B7---//---03---//---00---//  
 
 
-    printf("test.var1: %p\n",test.var1);    // 2 byte data LSB                 //---4E--//---B7---//                             => 0xB74E
-    printf("test.var2: %p\n",test.var2);    // 1 byte data LSB                 //---4E---//                                      => 0x4E
-    printf("test.var3: %p\n",test.var3);    // 4 byte data LSB                 //---4E---//---B7---//---03---//---00---//        => 0x3B74E
+    printf("test.var1: %p\n",test.var1);    // 2 byte data tu LSB         //---4E--//---B7---//                             => 0xB74E
+    printf("test.var2: %p\n",test.var2);    // 1 byte data tu LSB         //---4E---//                                      => 0x4E
+    printf("test.var3: %p\n",test.var3);    // 4 byte data tu LSB         //---4E---//---B7---//---03---//---00---//        => 0x3B74E
     return 0;
 }
 ```
@@ -625,7 +625,7 @@ test.var1: 0000B74E
 test.var2: 0000004E
 test.var3: 0003B74E
 ```
-vì các thành viên chia sẻ cùng 1 vị trí bộ nhó lên khi khai báo cho biến có kích thước lớn nhất, sau đó ta lấy giá trị của các biến thành viên khác thì khi đó nó sẽ đọc các byte giá trị của kích thước lớn nhất theo kích thước của biến thành viên đó. 
+vì các thành viên chia sẻ cùng 1 vị trí bộ nhó lên khi khai báo cho biến có kích thước lớn nhất, sau đó ta lấy giá trị của các biến thành viên khác thì khi đó nó sẽ đọc các byte giá trị của biến có kích thước lớn nhất đó theo kích thước của biến thành viên cần hiển thị. 
 
 </details>
 

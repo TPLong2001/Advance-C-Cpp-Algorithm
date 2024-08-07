@@ -905,7 +905,7 @@ typedef struct JsonValue {
   - Một linked list bao gồm một chuỗi các "nút" (nodes), mỗi nút là một cấu trúc có hai thành phần:
     + Thành phần dữ liệu: lưu thông tin về bản thân phần tử đó.
     + Thành phần liên kết: lưu địa chỉ phần tử liên kết với nó trong danh sách, nếu phần tử đó là phần tử cuối cùng thì thành phần này bằng NULL.
-  Cấu trúc của 1 node trong Singly Linked List.
+  #### Cấu trúc của 1 node trong Singly Linked List.
 ```c
 typedef struct node
 {

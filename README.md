@@ -957,7 +957,152 @@ typedef struct node
 
 
 
-# Lesson 11:
+# Lesson 11: STACK_QUEUE
+<details>
+  <summary>Chi tiết</summary>
+
+Ngăn xếp (stack) và hàng đợi (queue) là hai cấu trúc dữ liệu cơ bản trong lập trình. Chúng có cách tổ chức và thao tác với dữ liệu khác nhau, phù hợp với những bài toán cụ thể.
+  ### 1. Stack (ngăn xếp)
+  Nguyên tắc hoạt động:
+  - Cấu trúc dữ liệu tuân theo nguyên tắc "Last In, First Out" (LIFO), nghĩa là phần tử cuối cùng được thêm vào stack sẽ là phần tử đầu tiên được lấy ra.
+  Các thao tác chính:
+  - Push: Thêm một phần tử vào đỉnh ngăn xếp.
+  - Pop: Loại bỏ và trả về phần tử ở đỉnh ngăn xếp.
+  - Peek/Top: Trả về phần tử ở đỉnh ngăn xếp mà không loại bỏ nó.
+  Ứng dụng:
+  - Duyệt biểu thức toán học và xử lý dấu ngoặc.
+  - Quản lý lời gọi hàm trong ngôn ngữ lập trình.
+
+```c
+
+```
+  
+  ### 1. Queue (hàng đợi)
+  Nguyên tắc hoạt động:
+  - Cấu trúc dữ liệu tuân theo nguyên tắc "First In, First Out" (FIFO), nghĩa là phần tử đầu tiên được thêm vào hàng đợi sẽ là phần tử đầu tiên được lấy ra. 
+  Các thao tác chính:
+  - Enqueue: Thêm một phần tử vào cuối hàng đợi.
+  - Dequeue: Loại bỏ và trả về phần tử ở đầu hàng đợi.
+  - Peek/Front: Trả về phần tử ở đầu hàng đợi mà không loại bỏ nó.
+  Ứng dụng:
+  - Quản lý tác vụ trong các hệ thống điều hành.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+
+typedef struct Queue {
+    int* items;
+    int size;
+    int front, rear;
+} Queue;
+
+void initialize(Queue *queue, int size) 
+{
+    queue->items = (int*) malloc(sizeof(int)* size);
+    queue->front = -1;
+    queue->rear = -1;
+    queue->size = size;
+}
+
+int is_empty(Queue queue) {
+    return queue.front == -1;
+}
+
+int is_full(Queue queue) {
+    return (queue.rear + 1) % queue.size == queue.front;
+}
+
+void enqueue(Queue *queue, int value) {
+    if (!is_full(*queue)) {
+        if (is_empty(*queue)) {
+            queue->front = queue->rear = 0;
+        } else {
+            queue->rear = (queue->rear + 1) % queue->size;
+        }
+        queue->items[queue->rear] = value;
+    } else {
+        printf("Queue overflow\n");
+    }
+}
+
+int dequeue(Queue *queue) {
+    if (!is_empty(*queue)) {
+        int dequeued_value = queue->items[queue->front];
+        if (queue->front == queue->rear) {
+            queue->front = queue->rear = -1;
+        } else {
+            queue->front = (queue->front + 1) % queue->size;
+        }
+        return dequeued_value;
+    } else {
+        printf("Queue underflow\n");
+        return -1;
+    }
+}
+
+int front(Queue queue) {
+    if (!is_empty(queue)) {
+        return queue.items[queue.front];
+    } else {
+        printf("Queue is empty\n");
+        return -1;
+    }
+}
+
+int main() {
+    Queue queue;
+    initialize(&queue, 6);
+
+    enqueue(&queue, 10);
+    enqueue(&queue, 20);
+    enqueue(&queue, 30);
+    enqueue(&queue, 40);
+    enqueue(&queue, 50);
+    enqueue(&queue, 60);
+    enqueue(&queue, 70);                                    // Queue overflow
+
+    printf("Front element: %d\n", front(queue));            // 10
+
+    printf("Dequeue element: %d\n", dequeue(&queue));       // 10
+    printf("Dequeue element: %d\n", dequeue(&queue));       // 20
+
+    printf("Front element: %d\n", front(queue));            // 30
+
+    enqueue(&queue, 70);                                    
+    enqueue(&queue, 80);                                    
+    printf("Dequeue element: %d\n", dequeue(&queue));       // 30
+    printf("Front element: %d\n", front(queue));            // 40
+
+    return 0;
+}
+
+```
+    
+  ### Tiêu đề phụ 1.3
+  Nội dung của tiêu đề phụ 1.3.
+  
+  ### Tiêu đề phụ 1.3
+  Nội dung của tiêu đề phụ 1.3.
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Lesson 12:
 <details>
   <summary>Chi tiết</summary>
 

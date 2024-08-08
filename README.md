@@ -963,29 +963,102 @@ typedef struct node
 
 Ngăn xếp (stack) và hàng đợi (queue) là hai cấu trúc dữ liệu cơ bản trong lập trình. Chúng có cách tổ chức và thao tác với dữ liệu khác nhau, phù hợp với những bài toán cụ thể.
   ### 1. Stack (ngăn xếp)
-  Nguyên tắc hoạt động:
+  #### Nguyên tắc hoạt động:
   - Cấu trúc dữ liệu tuân theo nguyên tắc "Last In, First Out" (LIFO), nghĩa là phần tử cuối cùng được thêm vào stack sẽ là phần tử đầu tiên được lấy ra.
-  Các thao tác chính:
+  #### Các thao tác chính:
   - Push: Thêm một phần tử vào đỉnh ngăn xếp.
   - Pop: Loại bỏ và trả về phần tử ở đỉnh ngăn xếp.
   - Peek/Top: Trả về phần tử ở đỉnh ngăn xếp mà không loại bỏ nó.
-  Ứng dụng:
+  #### Ứng dụng:
   - Duyệt biểu thức toán học và xử lý dấu ngoặc.
   - Quản lý lời gọi hàm trong ngôn ngữ lập trình.
+  - Thuật toán duyệt đồ thị (DFS - Depth First Search).
 
 ```c
+#include <stdio.h>
+#include <stdlib.h>
 
+typedef struct Stack {
+    int* items;
+    int size;
+    int top;
+} Stack;
+
+void initialize( Stack *stack, int size) {
+    stack->items = (int*) malloc(sizeof(int) * size);
+    stack->size = size;
+    stack->top = -1;
+}
+
+int is_empty( Stack stack) {
+    return stack.top == -1;
+}
+
+int is_full( Stack stack) {
+    return stack.top == stack.size - 1;
+}
+
+void push( Stack *stack, int value) {
+    if (!is_full(*stack)) {
+        stack->items[++stack->top] = value;
+    } else {
+        printf("Stack overflow\n");
+    }
+}
+
+int pop( Stack *stack) {
+    if (!is_empty(*stack)) {
+        return stack->items[stack->top--];
+    } else {
+        printf("Stack underflow\n");
+        return -1;
+    }
+}
+
+int top( Stack stack) {
+    if (!is_empty(stack)) {
+        return stack.items[stack.top];
+    } else {
+        printf("Stack is empty\n");
+        return -1;
+    }
+}
+
+int main() {
+    Stack stack1;
+    initialize(&stack1, 5);
+
+
+    push(&stack1, 10);
+    push(&stack1, 20);
+    push(&stack1, 30);
+    push(&stack1, 40);
+    push(&stack1, 50);
+    push(&stack1, 60);
+
+    printf("Top element: %d\n", top(stack1));
+
+    printf("Pop element: %d\n", pop(&stack1));
+    printf("Pop element: %d\n", pop(&stack1));
+
+    printf("Top element: %d\n", top(stack1));
+
+    return 0;
+}
 ```
   
-  ### 1. Queue (hàng đợi)
+  ### 2. Queue (hàng đợi)
   Nguyên tắc hoạt động:
-  - Cấu trúc dữ liệu tuân theo nguyên tắc "First In, First Out" (FIFO), nghĩa là phần tử đầu tiên được thêm vào hàng đợi sẽ là phần tử đầu tiên được lấy ra. 
+  - Cấu trúc dữ liệu tuân theo nguyên tắc "First In, First Out" (FIFO), nghĩa là phần tử đầu tiên được thêm vào hàng đợi sẽ là phần tử đầu tiên được lấy ra.
+
   Các thao tác chính:
   - Enqueue: Thêm một phần tử vào cuối hàng đợi.
   - Dequeue: Loại bỏ và trả về phần tử ở đầu hàng đợi.
   - Peek/Front: Trả về phần tử ở đầu hàng đợi mà không loại bỏ nó.
+
   Ứng dụng:
   - Quản lý tác vụ trong các hệ thống điều hành.
+  - Thuật toán duyệt đồ thị (BFS - Breadth First Search).
 
 ```c
 #include <stdio.h>
@@ -1080,11 +1153,15 @@ int main() {
 
 ```
     
-  ### Tiêu đề phụ 1.3
-  Nội dung của tiêu đề phụ 1.3.
-  
-  ### Tiêu đề phụ 1.3
-  Nội dung của tiêu đề phụ 1.3.
+  ### 3. So sánh 
+ |Đặc Điểm|	Ngăn Xếp (Stack)|	Hàng Đợi (Queue)|
+ |:---|:---|:---|
+|Nguyên tắc|	LIFO (Last In, First Out)|	FIFO (First In, First Out)|
+|Thao tác chính|	Push, Pop, Peek|	Enqueue, Dequeue, Peek|
+|Truy cập|	Truy cập phần tử cuối cùng (đỉnh)|	Truy cập phần tử đầu tiên (front)|
+|Ứng dụng|	Quản lý lời gọi hàm, xử lý dấu ngoặc, thuật toán DFS|  Quản lý tác vụ, xử lý yêu cầu hệ thống, thuật toán BFS|
+|Sử dụng|  Xử lý các tác vụ theo nguyên tắc LIFO như quản lý lời gọi hàm hoặc duyệt đồ thị theo chiều sâu |  Xử lý các tác vụ theo nguyên tắc FIFO như quản lý tác vụ hoặc duyệt đồ thị theo chiều rộng|
+
 
 </details>
 

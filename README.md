@@ -1057,6 +1057,7 @@ int main() {
   - Peek/Front: Trả về phần tử ở đầu hàng đợi mà không loại bỏ nó.
 
   Ứng dụng:
+  - Truyền/nhận dữ liệu từ vi điều khiển.
   - Quản lý tác vụ trong các hệ thống điều hành.
   - Thuật toán duyệt đồ thị (BFS - Breadth First Search).
 

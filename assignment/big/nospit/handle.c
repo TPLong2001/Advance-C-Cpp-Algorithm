@@ -325,6 +325,6 @@ void bestSeller(home data[], int size)
             max = i;
     }
 
-
+    printf("Co tat ca %d Seller\n",sellerCount);
     printf("Seller ban duoc nhieu nha nhat la: %s voi %d can\n", name[max], count[max]);
 }

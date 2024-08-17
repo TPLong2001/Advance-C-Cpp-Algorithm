@@ -42,7 +42,7 @@ int compareByPhoneNumber(const Person *p1, const Person *p2){
     return arrayCompare(p1->phoneNumber, p2->phoneNumber);
 }
 
-void coppyDataPerson(Person *dich, Person *nguon){
+static void coppyDataPerson(Person *dich, Person *nguon){
     for (int i = 0; i < 30; i++)
     {
         dich->name[i] = nguon->name[i];
@@ -150,10 +150,3 @@ CenterPoint *binarySearch(CenterPoint *root, Person person, int (*compareFunct)(
     }
 }
 
-void print_list(Node *head) {
-    while (head != NULL) {
-        printDataPerson(&(head->data));
-        head = head->next;
-    }
-    printf("\n");
-}

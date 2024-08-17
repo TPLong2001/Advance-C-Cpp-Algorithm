@@ -2,7 +2,7 @@
 * File: binarySearch.h
 * Author: Long Truong
 * Date: 17/04/2024
-* Description: This is a header file consist of declare function
+* Description: This is a header file consist of declare functions and variables
 */
 #ifndef __BINARYSEARCH_H__
 #define __BINARYSEARCH_H__
@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+
 
 typedef struct Person {
     char name[30];
@@ -75,17 +75,6 @@ int compareByAddress(const Person *p1, const Person *p2);
 *   returns The space between two different integer number in the phone number
 */
 int compareByPhoneNumber(const Person *p1, const Person *p2);
-
-/*
-* Function: print_list
-* Description: This function print list in linked list
-* Input:
-*   head - an pointer Node point in head list
-* Output:
-*   not output
-*/
-void print_list(Node *head);
-
 
 /*
 * Function: add_node

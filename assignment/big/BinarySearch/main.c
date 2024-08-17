@@ -55,7 +55,8 @@ int main()
     int Array[MAX] = {5, 3, 9, 2, 7, 4, 11, 54, 12, 32, 13, 33, 26, 1, 27};
     sort(Array, MAX);
     display(Array, MAX);
-    int i = binarySearch(Array, 0, MAX -1, 13);
+
+    int i = binarySearch(Array, 0, MAX -1, 26);
     (i == 0x2FFF) ? printf("Not Found!\n") : printf("\nArr[%d] = %d\n", i, Array[i]);
     return 0;
 }

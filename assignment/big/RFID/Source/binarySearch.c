@@ -58,7 +58,7 @@ static void coppyDataPerson(Person *dich, Person *nguon){
     }
 }
 
-static void printDataPerson(const Person *p){
+void printDataPerson(const Person *p){
     printf("Name: %s\n",p->name);
     printf("Age: %d\n",p->age);
     printf("Address: %s\n",p->address);

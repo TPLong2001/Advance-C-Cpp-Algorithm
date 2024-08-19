@@ -17,6 +17,9 @@ typedef enum CompareType{
     comparePhoneNumber
 }CompareType;
 
+#define SELECT_COMPARE_BY(type) \
+    CompareType useCompareType = compare##type;
+
 Person per[100];
 Node *head = NULL;
 

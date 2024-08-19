@@ -12,9 +12,11 @@ int main()
         .phoneNumber = {}
     };
 
-    addListType(compareAge);
+    SELECT_COMPARE_BY(Age);
+
+    addListType(useCompareType);
     print_list();
-    binarySearchType(value, compareAge);
+    binarySearchType(value, useCompareType);
 
     return 0;
 }

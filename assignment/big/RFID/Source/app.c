@@ -7,71 +7,62 @@
 #include "..\Header\app.h"
 
 Node *head = NULL;
-CompareType usedCompareType;
+CompareType g_usedCompareType;
 
 static int (*checkCompareType())(const Person *, const Person *){
     int (*compareFunct)(const Person *, const Person *) = NULL;
-    switch (usedCompareType)
+    switch (g_usedCompareType)
     {
-        case compareName:
+        case COMPARE_NAME:
             compareFunct = compareByName;
             break;
-        case compareAge:
+        case COMPARE_AGE:
             compareFunct = compareByAge;
             break;
-        case compareAddress:
+        case COMPARE_ADDRESS:
             compareFunct = compareByAddress;
             break;
-        case comparePhoneNumber:
+        case COMPARE_PHONE_NUMBER:
             compareFunct = compareByPhoneNumber; 
-            break;   
+            break;  
+        default:
+            break; 
     }
     return compareFunct;
 }
 
-int addListType(){
+Status addListType(){
     int (*compareFunct)(const Person *, const Person *) = checkCompareType();
 
-    Person dataPerson;
+    Person *dataPerson = (Person*)malloc(sizeof(Person));
     char line[255];
     
     FILE*fp = fopen("D:/code/Advance C_Cpp Algorithm/Advance-C-Cpp-Algorithm/assignment/big/RFID/dataRFID.csv","r");  
     if(!fp)
     {
-        printf("Khong the mo file %s!\n","dataRFID.csv");
-        return -1;
+        return STATUS_FALSE;
     }
     fgets(line,255,fp);                                 //read line 1
 
     while(!feof(fp))
     {
         fgets(line,255,fp);
-        splitString(line, ",",&dataPerson);
+        splitString(line, ",",dataPerson);
         add_node(&head, dataPerson, compareFunct);
     }
     fclose(fp);
-    return 1;
+    free(dataPerson);
+    return STATUS_SUCCESS;
 }
 
-void binarySearchType(Person person){
+CenterPoint *binarySearchType(Person person){
     int (*compareFunct)(const Person *, const Person *) = checkCompareType();
-
     CenterPoint *ptr = centerPoint(head);
     CenterPoint *result = binarySearch(ptr, person, compareFunct);
     if (result != NULL) {
-        printf("Tim thay person:\n");
-        printDataPerson(&(result->person));
+        return result;
     } 
     else{
-        printf("Khong tim thay\n");
+        return NULL;
     }
-}
-
-void print_list() {
-    Node *list = head;
-    while (list != NULL) {
-        printDataPerson(&(list->data));
-        list = list->next;
-    }
-    printf("\n");
 }

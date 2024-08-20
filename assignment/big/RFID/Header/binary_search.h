@@ -4,31 +4,48 @@
 * Date: 17/04/2024
 * Description: This is a header file consist of declare functions and variables
 */
-#ifndef __BINARYSEARCH_H__
-#define __BINARYSEARCH_H__
+#ifndef __BINARY_SEARCH_H__
+#define __BINARY_SEARCH_H__
 
-
-
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define SIZE_NAME       32
-#define SIZE_ADDR       100
-#define SIZE_PHONE_NUM  11
-
+/*
+* struct: Person
+* Description:The structure contains information about the user
+* element:
+*   name        - a pointer to a string that stores the user's name
+*   age         - an integer value that stores the user's age
+*   address     - a pointer to a string that stores the user's address
+*   phoneNumber - a pointer to a string that stores the user's phoneNumber
+*/
 typedef struct Person {
-    char name[SIZE_NAME];
+    char *name;
     int age;
-    char address[SIZE_ADDR];
-    char phoneNumber[SIZE_PHONE_NUM];
+    char *address;
+    char *phoneNumber;
 } Person;
 
+/*
+* struct: Node
+* Description:The structure contains data and poiter next
+* element:
+*   data     - a Person value that stores the user's data
+*   next     - a pointer to other Node in List.
+*/
 typedef struct Node {
     Person data;
     struct Node *next;
 } Node;
 
+/*
+* struct: CenterPoint
+* Description:The structure binaryTree contains data and poiter left and right
+* element:
+*   person  - a Person value that stores the user's data
+*   left    - a pointer to left Node in binaryTree.
+*   right   - a pointer to right Node in binaryTree.
+*/
 typedef struct CenterPoint {
     Person person;
     struct CenterPoint *left;
@@ -86,7 +103,7 @@ int compareByPhoneNumber(const Person *p1, const Person *p2);
 * Input
 *   person  - an Persion value
 * Output:
-*   not output
+*   return none
 */
 void printDataPerson(const Person *p);
 
@@ -98,11 +115,11 @@ void printDataPerson(const Person *p);
 * Input:
 *   head    - an pointer Node point to head in list
 *   person  - an Persion value
-*   int (*compareFunct)(const Person *, const Person *) - callback function
+*   compareFunct - callback function
 * Output:
-*   not output
+*   return none
 */
-void add_node(Node **head, Person person, int (*compareFunct)(const Person *, const Person *));
+void add_node(Node **head, Person *person, int (*compareFunct)(const Person *, const Person *));
 
 /*
 * Function: centerPoint
@@ -119,6 +136,8 @@ CenterPoint *centerPoint(Node *head);
 * Description: This function search person data in binary tree with type data search belong compareFunct
 * Input:
 *   root    - an pointer CenterPoint point to root in binary tree
+*   person  - an Persion value 
+*   compareFunct    - callback function 
 * Output:
 *   return root of binary tree
 */
@@ -126,15 +145,14 @@ CenterPoint *binarySearch(CenterPoint *root, Person person, int (*compareFunct)(
 
 
 /*
-* Function: void splitString(const char *str, const char *delim,Person *person);
-
+* Function: splitString
 * Description: This function Split a string into small parts based on the delimiter character then save data to Persion value
 * Input:
 *   str    - an pointer char point to string need split
 *   person - an Persion value to stora data from string
 *   delim  - an pointer char point to string contains 1 separator character
 * Output:
-*   not output
+*   return none
 */
 void splitString(const char *str, const char *delim, Person *person);
 

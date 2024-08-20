@@ -1,10 +1,14 @@
 #include "..\Header\app.h"
-// #include "..\Source\binarySearch.c"
+#include "..\Header\test.h"
+
+// #include "..\Source\test.c"
+// #include "..\Source\binary_search.c"
 // #include "..\Source\app.c"
 
+extern CompareType g_usedCompareType; 
 
-int main() 
-{
+int main() {
+    CenterPoint *result;
     Person value = {    
         "asfy",
         22,                         //age = 23
@@ -12,16 +16,22 @@ int main()
         "0325344355"
     };
 
-    SELECT_COMPARE_BY(compareAddress);
+    SELECT_COMPARE_BY(COMPARE_ADDRESS);
 
     //load data from FILE to List
-    if(addListType() == -1){
+    if(addListType() == STATUS_FALSE){
+        printf("Khong the mo file %s!\n","dataRFID.csv");
         return 0;
     }
 
     print_list();
     
-    binarySearchType(value);
-
+    if((result = binarySearchType(value)) != NULL){
+        printf("Tim thay person:\n");
+        printDataPerson(&(result->person));
+    }else{
+        printf("Khong tim thay\n");
+    }
+        
     return 0;
 }

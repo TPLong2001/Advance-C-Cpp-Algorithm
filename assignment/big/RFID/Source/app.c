@@ -4,13 +4,14 @@
 * Date: 17/04/2024
 * Description: This is a source file consist of function serving binary search
 */
-#include "D:\code\Advance C_Cpp Algorithm\Advance-C-Cpp-Algorithm\assignment\big\RFID\Header\app.h"
+#include "..\Header\app.h"
 
+Node *head = NULL;
+CompareType usedCompareType;
 
-int addListType(Node **head, CompareType type){
-
+static int (*checkCompareType())(const Person *, const Person *){
     int (*compareFunct)(const Person *, const Person *) = NULL;
-    switch (type)
+    switch (usedCompareType)
     {
         case compareName:
             compareFunct = compareByName;
@@ -25,6 +26,11 @@ int addListType(Node **head, CompareType type){
             compareFunct = compareByPhoneNumber; 
             break;   
     }
+    return compareFunct;
+}
+
+int addListType(){
+    int (*compareFunct)(const Person *, const Person *) = checkCompareType();
 
     Person dataPerson;
     char line[255];
@@ -41,29 +47,14 @@ int addListType(Node **head, CompareType type){
     {
         fgets(line,255,fp);
         splitString(line, ",",&dataPerson);
-        add_node(head, dataPerson, compareFunct);
+        add_node(&head, dataPerson, compareFunct);
     }
     fclose(fp);
     return 1;
 }
 
-void binarySearchType(Node *head, Person person, CompareType type){
-    int (*compareFunct)(const Person *, const Person *) = NULL;
-    switch (type)
-    {
-        case compareName:
-            compareFunct = compareByName;
-            break;
-        case compareAge:
-            compareFunct = compareByAge;
-            break;
-        case compareAddress:
-            compareFunct = compareByAddress;
-            break;
-        case comparePhoneNumber:
-            compareFunct = compareByPhoneNumber; 
-            break;   
-    }
+void binarySearchType(Person person){
+    int (*compareFunct)(const Person *, const Person *) = checkCompareType();
 
     CenterPoint *ptr = centerPoint(head);
     CenterPoint *result = binarySearch(ptr, person, compareFunct);
@@ -76,7 +67,7 @@ void binarySearchType(Node *head, Person person, CompareType type){
     }
 }
 
-void print_list(Node *head) {
+void print_list() {
     Node *list = head;
     while (list != NULL) {
         printDataPerson(&(list->data));

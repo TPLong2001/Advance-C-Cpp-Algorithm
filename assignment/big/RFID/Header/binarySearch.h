@@ -80,7 +80,17 @@ int compareByAddress(const Person *p1, const Person *p2);
 */
 int compareByPhoneNumber(const Person *p1, const Person *p2);
 
+/*
+* Function: printDataPerson
+* Description: This function printf each data in Person value 
+* Input
+*   person  - an Persion value
+* Output:
+*   not output
+*/
 void printDataPerson(const Person *p);
+
+//////////////////////////////////////////////////////////////////////////////////////
 
 /*
 * Function: add_node
@@ -115,6 +125,17 @@ CenterPoint *centerPoint(Node *head);
 CenterPoint *binarySearch(CenterPoint *root, Person person, int (*compareFunct)(const Person *, const Person *));
 
 
-void splitString(const char *str, const char *delim,Person *person);
+/*
+* Function: void splitString(const char *str, const char *delim,Person *person);
+
+* Description: This function Split a string into small parts based on the delimiter character then save data to Persion value
+* Input:
+*   str    - an pointer char point to string need split
+*   person - an Persion value to stora data from string
+*   delim  - an pointer char point to string contains 1 separator character
+* Output:
+*   not output
+*/
+void splitString(const char *str, const char *delim, Person *person);
 
 #endif

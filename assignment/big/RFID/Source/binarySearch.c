@@ -4,7 +4,7 @@
 * Date: 17/04/2024
 * Description: This is a source file consist of function serving binary search
 */
-#include"D:\code\Advance C_Cpp Algorithm\Advance-C-Cpp-Algorithm\assignment\big\RFID\Header\binarySearch.h"
+#include"..\Header\binarySearch.h"
 
 static int stringCompare(const char *str1, const char *str2){
     while(*str1 && (*str1 == *str2)){
@@ -138,12 +138,12 @@ CenterPoint *binarySearch(CenterPoint *root, Person person, int (*compareFunct)(
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-int CharToNum(char x)
+static int CharToNum(char x)
 {
     return (int)x - 48;
 }
 
-int stringToNum(char *string)
+static int stringToNum(char *string)
 {
     int result = 0;
     int len = strlen(string);
@@ -154,7 +154,7 @@ int stringToNum(char *string)
     return result;
 }
 
-void stringToArray(char *string, char array[],int size)
+static void stringToArray(char *string, char array[],int size)
 {
     int len = strlen(string);
     if(len >= size)
@@ -170,8 +170,8 @@ void stringToArray(char *string, char array[],int size)
 
 void splitString(const char *str, const char *delim,Person *person) {
     char *copy = strdup(str);           //Sao chép chuỗi gốc để giữ nguyên chuỗi gốc
-    char *token = copy;                 //chuỗi để xử lý thành từng phần nhỏ
-    char *next_token = NULL;            //chuỗi dùng để phân tách từng phần nhỏ
+    char *token = copy;                 //con trỏ chuỗi để xử lý thành từng phần nhỏ và lấy data
+    char *next_token = NULL;            //con trỏ chuỗi dùng để phân tách từng phần nhỏ
     int column = 0;                     //stt cột
 
     while (token != NULL) {
@@ -203,5 +203,5 @@ void splitString(const char *str, const char *delim,Person *person) {
         token = next_token;
         column++;
     }
-    free(copy);  // Giải phóng bộ nhớ đã sao chép chuỗi
+    free(copy);         // Giải phóng bộ nhớ đã sao chép chuỗi
 }

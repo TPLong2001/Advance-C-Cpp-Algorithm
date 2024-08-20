@@ -7,7 +7,7 @@
 #ifndef __APP_H__
 #define __APP_H__
 
-#include "D:\code\Advance C_Cpp Algorithm\Advance-C-Cpp-Algorithm\assignment\big\RFID\Header\binarySearch.h"
+#include "..\Header\binarySearch.h"
 
 typedef enum CompareType{
     compareName,
@@ -16,42 +16,42 @@ typedef enum CompareType{
     comparePhoneNumber
 }CompareType;
 
+extern CompareType usedCompareType; 
 #define SELECT_COMPARE_BY(type) \
-    CompareType useCompareType = type;
+    usedCompareType = type;
 
 
 /*
 * Function: addListType
 * Description: This function create person then add to list with following order config type 
 * Input:
-*   type - an CompareType value, type order you want sort
+*   not input
 * Output:
-*   not output
+*   return -1 if false file open
 */
-int addListType(Node **head, CompareType type);
+int addListType();
 
 
 /*
 * Function: binarySearchType
 * Description: This function search person with following order config type 
 * Input:
-*   type - an CompareType value, type order you want sort to binary tree
 *   person - an Person value you want search
 * Output:
 *   not output
 */
-void binarySearchType(Node *head, Person person, CompareType type);
+void binarySearchType(Person person);
 
 
 /*
 * Function: print_list
 * Description: This function print list in linked list
 * Input:
-*   not onput
+*   not input
 * Output:
 *   not output
 */
-void print_list(Node *head) ;
+void print_list() ;
 
 
 #endif

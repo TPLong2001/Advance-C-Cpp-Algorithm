@@ -1,10 +1,12 @@
+1. add các file.c vào main và sử dụng cmd
+
 gcc -IHeader -c Source/main.c -o Source/main.o
 gcc -IHeader -c Source/app.c -o Source/app.o
 gcc -IHeader -c Source/binarySearch.c -o Source/binarySearch.o
 gcc Source/main.o Source/app.o Source/binarySearch.o -o main
 
 
-hoặc makefile => sài lệnh: mingw32-make
+2. hoặc makefile => sài lệnh: mingw32-make
 
 g++ -IHeader -Wall -Wextra   -c -o Source/app.o Source/app.c
 g++ -IHeader -Wall -Wextra   -c -o Source/main.o Source/main.c

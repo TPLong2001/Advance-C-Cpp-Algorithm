@@ -14,18 +14,6 @@ static int stringCompare(const char *str1, const char *str2){
     return *str1 - *str2;
 }
 
-static int arrayCompare(const int *arr1, const int *arr2){
-    int compare;
-    for (int i = 0; i < 10; i++)
-    {
-        compare = arr1[i] - arr2[i];
-        if(compare != 0){
-            break;
-        }
-    }
-    return compare;
-}
-
 int compareByName(const Person *p1, const Person *p2){
     return stringCompare(p1->name, p2->name);
 }
@@ -39,36 +27,35 @@ int compareByAddress(const Person *p1, const Person *p2){
 }
 
 int compareByPhoneNumber(const Person *p1, const Person *p2){
-    return arrayCompare(p1->phoneNumber, p2->phoneNumber);
-}
-
-static void coppyDataPerson(Person *dich, Person *nguon){
-    for (int i = 0; i < 30; i++)
-    {
-        dich->name[i] = nguon->name[i];
-    }
-    dich->age = nguon->age;
-    for (int i = 0; i < 100; i++)
-    {
-        dich->address[i] = nguon->address[i];
-    }
-    for (int i = 0; i < 10; i++)
-    {
-        dich->phoneNumber[i] = nguon->phoneNumber[i];
-    }
+    return stringCompare(p1->phoneNumber, p2->phoneNumber);
 }
 
 void printDataPerson(const Person *p){
     printf("Name: %s\n",p->name);
     printf("Age: %d\n",p->age);
     printf("Address: %s\n",p->address);
-    printf("Phone Number: ");
-    for (int i = 0; i < 10; i++)
-    {
-        printf("%d",p->phoneNumber[i]);
-    }
-    printf("\n");
+    printf("Phone Number: %s\n\n",p->phoneNumber);
 }
+
+/////////////////////////////////////////////////////////////////////
+
+static void coppyDataPerson(Person *dich, Person *nguon){
+    for (int i = 0; i < SIZE_NAME; i++)
+    {
+        dich->name[i] = nguon->name[i];
+    }
+    dich->age = nguon->age;
+    for (int i = 0; i < SIZE_ADDR; i++)
+    {
+        dich->address[i] = nguon->address[i];
+    }
+    for (int i = 0; i < SIZE_PHONE_NUM; i++)
+    {
+        dich->phoneNumber[i] = nguon->phoneNumber[i];
+    }
+}
+
+
 
 //them node va sap xep tu be den lon
 void add_node(Node **head, Person person, int (*compareFunct)(const Person *, const Person *)) {
@@ -127,7 +114,6 @@ CenterPoint *centerPoint(Node *head) {
 }
 
 
-
 //ham tim kiem nhi phan
 CenterPoint *binarySearch(CenterPoint *root, Person person, int (*compareFunct)(const Person *, const Person *)) {
     static int loop = 0;
@@ -150,3 +136,72 @@ CenterPoint *binarySearch(CenterPoint *root, Person person, int (*compareFunct)(
     }
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+int CharToNum(char x)
+{
+    return (int)x - 48;
+}
+
+int stringToNum(char *string)
+{
+    int result = 0;
+    int len = strlen(string);
+    for(int i = 0; i < len; i++){
+        result = CharToNum(*string) + result * 10;
+        string++;
+    }
+    return result;
+}
+
+void stringToArray(char *string, char array[],int size)
+{
+    int len = strlen(string);
+    if(len >= size)
+    {
+        len = size - 1;
+    }
+    for(int i = 0; i < len; i++){
+        array[i] = *string;
+        string++;
+    }
+    array[len] = '\0';
+}
+
+void splitString(const char *str, const char *delim,Person *person) {
+    char *copy = strdup(str);           //Sao chép chuỗi gốc để giữ nguyên chuỗi gốc
+    char *token = copy;                 //chuỗi để xử lý thành từng phần nhỏ
+    char *next_token = NULL;            //chuỗi dùng để phân tách từng phần nhỏ
+    int column = 0;                     //stt cột
+
+    while (token != NULL) {
+        // Tìm vị trí của dấu phân cách tiếp theo
+        next_token = strstr(token, delim);
+
+        if (next_token != NULL) {
+            // Đặt dấu kết thúc chuỗi tại vị trí của dấu phân cách
+            *next_token = '\0';
+            next_token += strlen(delim);    //lấy địa chỉ mới sau dấu phân cách
+        }
+
+        //5 7 10 14 16
+        switch (column)
+        {
+        case 0:
+            stringToArray(token,person->name,SIZE_NAME);
+            break;
+        case 1:
+            person->age = stringToNum(token);
+            break;
+        case 2:
+            stringToArray(token,person->address,SIZE_ADDR);
+            break;
+        case 3:
+            stringToArray(token,person->phoneNumber,SIZE_PHONE_NUM);
+            break;
+        }
+        token = next_token;
+        column++;
+    }
+    free(copy);  // Giải phóng bộ nhớ đã sao chép chuỗi
+}

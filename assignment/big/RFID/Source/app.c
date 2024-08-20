@@ -6,7 +6,9 @@
 */
 #include "D:\code\Advance C_Cpp Algorithm\Advance-C-Cpp-Algorithm\assignment\big\RFID\Header\app.h"
 
-void addListType(CompareType type){
+
+int addListType(Node **head, CompareType type){
+
     int (*compareFunct)(const Person *, const Person *) = NULL;
     switch (type)
     {
@@ -24,15 +26,28 @@ void addListType(CompareType type){
             break;   
     }
 
-    //tao ngau nhien 100 node
-    srand(time(NULL));
-    for (int i = 0; i < 100; i++) {
-        per[i].age = rand() % 100 + 1;
-        add_node(&head, per[i], compareFunct);
+    Person dataPerson;
+    char line[255];
+    
+    FILE*fp = fopen("D:/code/Advance C_Cpp Algorithm/Advance-C-Cpp-Algorithm/assignment/big/RFID/dataRFID.csv","r");  
+    if(!fp)
+    {
+        printf("Khong the mo file %s!\n","dataRFID.csv");
+        return -1;
     }
+    fgets(line,255,fp);                                 //read line 1
+
+    while(!feof(fp))
+    {
+        fgets(line,255,fp);
+        splitString(line, ",",&dataPerson);
+        add_node(head, dataPerson, compareFunct);
+    }
+    fclose(fp);
+    return 1;
 }
 
-void binarySearchType(Person person,CompareType type){
+void binarySearchType(Node *head, Person person, CompareType type){
     int (*compareFunct)(const Person *, const Person *) = NULL;
     switch (type)
     {
@@ -61,7 +76,7 @@ void binarySearchType(Person person,CompareType type){
     }
 }
 
-void print_list() {
+void print_list(Node *head) {
     Node *list = head;
     while (list != NULL) {
         printDataPerson(&(list->data));

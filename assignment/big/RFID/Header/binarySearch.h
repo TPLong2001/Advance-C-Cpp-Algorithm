@@ -11,13 +11,17 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
+#define SIZE_NAME       32
+#define SIZE_ADDR       100
+#define SIZE_PHONE_NUM  11
 
 typedef struct Person {
-    char name[30];
+    char name[SIZE_NAME];
     int age;
-    char address[100];
-    int phoneNumber[10];
+    char address[SIZE_ADDR];
+    char phoneNumber[SIZE_PHONE_NUM];
 } Person;
 
 typedef struct Node {
@@ -76,6 +80,8 @@ int compareByAddress(const Person *p1, const Person *p2);
 */
 int compareByPhoneNumber(const Person *p1, const Person *p2);
 
+void printDataPerson(const Person *p);
+
 /*
 * Function: add_node
 * Description: This function create new Node with data of person and insert to list with type sort belong compareFunct
@@ -107,5 +113,8 @@ CenterPoint *centerPoint(Node *head);
 *   return root of binary tree
 */
 CenterPoint *binarySearch(CenterPoint *root, Person person, int (*compareFunct)(const Person *, const Person *));
+
+
+void splitString(const char *str, const char *delim,Person *person);
 
 #endif

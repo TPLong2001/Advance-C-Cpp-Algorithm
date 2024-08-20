@@ -7,7 +7,6 @@
 #ifndef __APP_H__
 #define __APP_H__
 
-#include <time.h>
 #include "D:\code\Advance C_Cpp Algorithm\Advance-C-Cpp-Algorithm\assignment\big\RFID\Header\binarySearch.h"
 
 typedef enum CompareType{
@@ -18,10 +17,7 @@ typedef enum CompareType{
 }CompareType;
 
 #define SELECT_COMPARE_BY(type) \
-    CompareType useCompareType = compare##type;
-
-Person per[100];
-Node *head = NULL;
+    CompareType useCompareType = type;
 
 
 /*
@@ -32,7 +28,7 @@ Node *head = NULL;
 * Output:
 *   not output
 */
-void addListType(CompareType type);
+int addListType(Node **head, CompareType type);
 
 
 /*
@@ -44,7 +40,7 @@ void addListType(CompareType type);
 * Output:
 *   not output
 */
-void binarySearchType(Person person,CompareType type);
+void binarySearchType(Node *head, Person person, CompareType type);
 
 
 /*
@@ -55,7 +51,7 @@ void binarySearchType(Person person,CompareType type);
 * Output:
 *   not output
 */
-void print_list(void);
+void print_list(Node *head) ;
 
 
 #endif

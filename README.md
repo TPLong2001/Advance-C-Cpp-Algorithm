@@ -29,7 +29,10 @@ int main{
 }
 ```
 ## 2. function pointer
-#### Con trỏ hàm là 1 con trỏ lưu trữ địa chỉ của 1 hàm mà nó đang trỏ đến. Nó cũng có thể truyền một fumctiom như một đối số cho function khác.
+- Con trỏ hàm là 1 con trỏ lưu trữ địa chỉ của 1 hàm mà nó đang trỏ đến. Nó cũng có thể truyền một fumctiom như một đối số cho function khác.
+
+Example:
+
 ```c
 #include<stdio.h>
 void tong(int a, int b){
@@ -65,6 +68,55 @@ int main (int argc, char const *argv[]){
     printf("Test: %c\n",text());
     return 0;
 }
+```
+- Ta cũng có thể viết một hàm trả về địa chỉ của một hàm khác bằng cách sử dụng con trỏ hàm trong C
+
+Example
+```c
+#include <stdio.h>
+
+// Định nghĩa các hàm add và subtract
+int add(int a, int b) {
+    return a + b;
+}
+
+int subtract(int a, int b) {
+    return a - b;
+}
+
+// Định nghĩa một hàm trả về con trỏ hàm
+int (*getOperation(char op))(int, int) {
+    if (op == '+') {
+        return add;
+    } else if (op == '-') {
+        return subtract;
+    } else {
+        return NULL;  // Trường hợp không hợp lệ
+    }
+}
+
+int main() {
+    // Sử dụng hàm getOperation để lấy địa chỉ của hàm add
+    int (*operation)(int, int) = getOperation('+');
+    
+    if (operation != NULL) {
+        printf("Result: %d\n", operation(5, 3));  // Output: Result: 8
+    } else {
+        printf("Invalid operation\n");
+    }
+
+    // Sử dụng hàm getOperation để lấy địa chỉ của hàm subtract
+    operation = getOperation('-');
+    
+    if (operation != NULL) {
+        printf("Result: %d\n", operation(5, 3));  // Output: Result: 2
+    } else {
+        printf("Invalid operation\n");
+    }
+
+    return 0;
+}
+
 ```
 
 ## 3.Type pointer
